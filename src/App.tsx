@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react'
+import './App.css'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [lat, setLat] = useState<Number>()
+	const [long, setLong] = useState<Number>()
+	const [data, setData] = useState()
+
+	useEffect(() => {
+		const fetchData = async () => {
+			navigator.geolocation.getCurrentPosition(position => {
+				setLat(position.coords.latitude)
+				setLong(position.coords.longitude)
+			})
+
+			await fetch(
+				`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
+			)
+				.then(res => res.json())
+				.then(result => {
+					setData(result)
+					console.log(result)
+				})
+		}
+
+		fetchData()
+	}, [lat, long])
+
+	return <div className='app'>Hello world!</div>
 }
 
-export default App;
+export default App
