@@ -1,5 +1,12 @@
 .app {
 	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.daily-info {
+	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+	margin-bottom: 50px;
 }
