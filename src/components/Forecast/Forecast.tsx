@@ -8,24 +8,27 @@ const options: Intl.DateTimeFormatOptions = {
 
 const Forecast = (props: any) => {
 	return (
-		<div className='forecast'>
-			Forecast
-			{props.values.map((day: any) => {
-				return (
-					<>
-						<div>
-							Date: {new Date(day.datetime).toLocaleDateString('ru', options)}
+		props &&
+		props.values && (
+			<div className='forecast'>
+				Forecast
+				{props.values.map((day: any, i: any) => {
+					return (
+						<div key={i} className='forecast-day'>
+							<div>
+								Date: {new Date(day.datetime).toLocaleDateString('ru', options)}
+							</div>
+							<div>Conditions: {day.conditions}</div>
+							<div>Temp day: {day.maxt}</div>
+							<div>Temp night: {day.mint}</div>
+							<div>
+								Wind: {day.wdir}, {day.wspd}
+							</div>
 						</div>
-						<div>Conditions: {day.conditions}</div>
-						<div>Temp day: {day.maxt}</div>
-						<div>Temp night: {day.mint}</div>
-						<div>
-							WSind: {day.wdir}, {day.wspd}
-						</div>
-					</>
-				)
-			})}
-		</div>
+					)
+				})}
+			</div>
+		)
 	)
 }
 
