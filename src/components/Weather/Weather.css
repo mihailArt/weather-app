@@ -1,0 +1,19 @@
+.weather-today {
+	border: 1px solid black;
+	border-radius: 8px;
+	padding: 10px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 12%;
+	height: 200px;
+}
+
+.weather-today-header {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}

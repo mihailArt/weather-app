@@ -5,6 +5,20 @@ import Weather from './components/Weather/Weather'
 import Forecast from './components/Forecast/Forecast'
 import SearchPlace from './components/SearchPlace/SearchPlace'
 
+function getCardinalDirection(angle: any) {
+	const directions = [
+		'↑ N',
+		'↗ NE',
+		'→ E',
+		'↘ SE',
+		'↓ S',
+		'↙ SW',
+		'← W',
+		'↖ NW',
+	]
+	return directions[Math.round(angle / 45) % 8]
+}
+
 const fetchPlace = async (text: any) => {
 	try {
 		const res = await fetch(
@@ -41,7 +55,7 @@ function App() {
 	useEffect(() => {
 		const fetchData = async () => {
 			await fetch(
-				`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}&lang=ru`
+				`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=metric&APPID=${process.env.REACT_APP_API_KEY}`
 			)
 				.then(res => res.json())
 				.then(result => {
@@ -49,7 +63,7 @@ function App() {
 				})
 
 			await fetch(
-				`${process.env.REACT_APP_API_URL_FORECAST}/forecast?locations=${lat},${long}&aggregateHours=24&unitGroup=metric&shortColumnNames=false&contentType=json&key=${process.env.REACT_APP_API_KEY_FORECAST}`
+				`${process.env.REACT_APP_API_URL_FORECAST}/forecast?locations=${lat},${long}&aggregateHours=24&unitGroup=metric&shortColumnNames=false&contentType=json&forecastDays=7&key=${process.env.REACT_APP_API_KEY_FORECAST}`
 			)
 				.then(res => res.json())
 				.then(result => {
@@ -90,7 +104,13 @@ function App() {
 					temp={data.main.temp}
 					feels_like={data.main.feels_like}
 					pressure={data.main.pressure}
-					wind={data.wind.deg + ' ' + data.wind.speed}
+					wind={
+						'Wind: ' +
+						getCardinalDirection(data.wind.deg) +
+						', ' +
+						Math.round(data.wind.speed) +
+						' m/s'
+					}
 				/>
 
 				<SearchPlace
