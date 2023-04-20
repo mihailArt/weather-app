@@ -1,4 +1,5 @@
 .forecast {
+	margin-top: 100px;
 	display: flex;
 	justify-content: center;
 }
@@ -21,4 +22,10 @@
 	justify-content: space-between;
 	align-items: center;
 	user-select: none;
+}
+
+.forecast-day-header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }

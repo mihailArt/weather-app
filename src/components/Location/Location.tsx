@@ -9,6 +9,8 @@ interface ILocation {
 	long: number
 }
 
+const regionNames = new Intl.DisplayNames(['en'], { type: 'region' })
+
 const Location = ({
 	handleOpen,
 	country,
@@ -19,13 +21,15 @@ const Location = ({
 }: ILocation) => {
 	return (
 		<div className='location'>
-			Location
-			<div>Country: {country}</div>
-			<div>City: {city}</div>
-			<div>Time: {time.toLocaleTimeString()}</div>
-			<div>Latitude: {lat}</div>
-			<div>Longitude: {long}</div>
-			<button onClick={handleOpen}>Change city</button>
+			<div>{regionNames.of(country || '')}</div>
+			<div>{city}</div>
+			<div>{time.toLocaleTimeString()}</div>
+			<div>
+				{lat}, {long}
+			</div>
+			<button className='change-city-btn' onClick={handleOpen}>
+				Change city
+			</button>
 		</div>
 	)
 }

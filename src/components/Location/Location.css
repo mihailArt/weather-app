@@ -1,3 +1,4 @@
 .location {
 	text-align: end;
+	user-select: none;
 }
