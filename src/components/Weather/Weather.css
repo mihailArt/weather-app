@@ -1,6 +1,8 @@
 .weather-today {
+	color: aliceblue;
+	background-color: rgba(5, 26, 44, 0.5);
+
 	user-select: none;
-	border: 1px solid black;
 	border-radius: 8px;
 	padding: 10px;
 
@@ -8,8 +10,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	width: 12%;
-	height: 200px;
+	width: 15%;
 }
 
 .weather-today-header {
@@ -17,4 +18,19 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+.weather-date {
+	font-size: larger;
+}
+
+.weather-description {
+	font-size: large;
+	margin-bottom: 5px;
+}
+
+.weather-temp {
+	font-size: 28px;
+	font-weight: 600;
+	margin-bottom: 10px;
 }

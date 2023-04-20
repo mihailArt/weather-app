@@ -21,29 +21,28 @@ function getCardinalDirection(angle: any) {
 	return directions[Math.round(angle / 45) % 8]
 }
 
-const Forecast = ({ children, ...props }: any) => {
+const Forecast = ({ values }: any) => {
 	return (
-		props &&
-		props.values && (
+		values.length && (
 			<div className='forecast'>
 				<Carousel>
-					{props.values.map((day: any, i: any) => {
+					{values.map((day: any, i: any) => {
 						return (
 							<div key={i} className='forecast-day-card'>
-								<div key={i} className='forecast-day'>
+								<div className='forecast-day'>
 									<div className='forecast-day-header'>
-										<div>
+										<div className='forecast-date'>
 											{new Date(day.datetime).toLocaleDateString(
 												'en-us',
 												options
 											)}
 										</div>
-										<div>{day.conditions}</div>
+										<div className='forecast-description'>{day.conditions}</div>
 									</div>
-									<div>
+									<div className='forecast-temp'>
 										{Math.round(day.maxt)} °C / {Math.round(day.mint)} °C
 									</div>
-									<div>
+									<div className='forecast-wind'>
 										Wind: {getCardinalDirection(day.wdir)}, {day.wspd} m/s
 									</div>
 								</div>

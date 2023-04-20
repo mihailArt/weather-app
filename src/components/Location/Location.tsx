@@ -21,14 +21,14 @@ const Location = ({
 }: ILocation) => {
 	return (
 		<div className='location'>
-			<div>{regionNames.of(country || '')}</div>
-			<div>{city}</div>
-			<div>{time.toLocaleTimeString()}</div>
-			<div>
-				{lat}, {long}
+			<div className='location-country'>{regionNames.of(country || '')}</div>
+			<div className='location-city'>{city}</div>
+			<div className='location-coords'>
+				{Number(lat).toFixed(6)}, {Number(long).toFixed(6)}
 			</div>
+			<div className='location-time'>{time.toLocaleTimeString()}</div>
 			<button className='change-city-btn' onClick={handleOpen}>
-				Change city
+				Change
 			</button>
 		</div>
 	)

@@ -12,8 +12,10 @@
 }
 
 .forecast-day {
+	color: aliceblue;
+	background-color: rgba(5, 26, 44, 0.5);
+
 	margin: 5px;
-	border: 1px solid black;
 	border-radius: 8px;
 	padding: 10px;
 
@@ -28,4 +30,19 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.forecast-date {
+	font-size: larger;
+}
+
+.forecast-description {
+	font-size: large;
+	margin-bottom: 10px;
+}
+
+.forecast-temp {
+	font-size: 28px;
+	font-weight: 600;
+	margin-bottom: 10px;
 }

@@ -2,3 +2,35 @@
 	text-align: end;
 	user-select: none;
 }
+
+.location-country {
+	margin-bottom: 5px;
+	font-size: large;
+}
+
+.location-city {
+	margin-bottom: 5px;
+	font-size: larger;
+	font-weight: 500;
+}
+
+.location-coords {
+	margin-bottom: 10px;
+	font-size: medium;
+}
+
+.location-time {
+	margin-bottom: 10px;
+	font-size: large;
+}
+
+.change-city-btn {
+	background-color: transparent;
+	background-repeat: no-repeat;
+	border: 1px solid black;
+	border-radius: 5px;
+	cursor: pointer;
+	padding: 5px 20px 5px 20px;
+	font-family: Montserrat;
+	font-size: medium;
+}

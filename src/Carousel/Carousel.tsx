@@ -2,7 +2,7 @@ import { useEffect, useState, Children, cloneElement } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import './Carousel.css'
 
-const PAGE_WIDTH = 225
+const PAGE_WIDTH = 250
 const COUNT_OF_PAGES = 5
 
 const Carousel = ({ children }: any) => {
@@ -18,7 +18,7 @@ const Carousel = ({ children }: any) => {
 	const handleRightArrowClick = () => {
 		setOffset(currentOffset => {
 			const newOffset = currentOffset - PAGE_WIDTH
-			const maxOffset = -(PAGE_WIDTH * (pages.length - 1 - COUNT_OF_PAGES))
+			const maxOffset = -(PAGE_WIDTH * (pages.length - COUNT_OF_PAGES))
 			return Math.max(newOffset, maxOffset)
 		})
 	}
@@ -35,8 +35,7 @@ const Carousel = ({ children }: any) => {
 				})
 			})
 		)
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [children])
 
 	return (
 		<div className='carousel'>

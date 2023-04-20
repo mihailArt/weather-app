@@ -1,0 +1,33 @@
+.form-container {
+	width: 30%;
+}
+
+.form-inputs {
+	display: flex;
+}
+
+.change-city-input {
+	font-family: Montserrat;
+	width: 75%;
+	height: 36px;
+	padding: 5px 15px;
+	font-size: 18px;
+	color: #212529;
+	background-color: #fff;
+	border: 1px solid #bdbdbd;
+	border-radius: 5px;
+}
+
+.submit-city-btn {
+	font-family: Montserrat;
+	font-size: 14px;
+	background-color: #fff;
+	border: 1px solid #bdbdbd;
+	border-radius: 5px;
+	margin-left: 5px;
+	width: 25%;
+}
+
+.submit-city-btn:hover {
+	background-color: #4e5a7a;
+}

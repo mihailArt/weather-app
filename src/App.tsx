@@ -35,11 +35,10 @@ function App() {
 	const [lat, setLat] = useState<number>(0)
 	const [long, setLong] = useState<number>(0)
 	const [data, setData] = useState<any>(null)
-	const [forecast, setForecast] = useState<any>()
+	const [forecast, setForecast] = useState<any>({})
 
 	const [city, setCity] = useState('')
 	const [autocompleteCities, setAutocompleteCities] = useState<any>([])
-	const [autocompleteErr, setAutocompleteErr] = useState('')
 
 	const [open, setOpen] = useState(false)
 	const handleOpen = () => setOpen(true)
@@ -92,7 +91,6 @@ function App() {
 		!autocompleteCities.includes(e.target.value) &&
 			res.features &&
 			setAutocompleteCities(res.features.map((place: any) => place.place_name))
-		res.error ? setAutocompleteErr(res.error) : setAutocompleteErr('')
 	}
 
 	return (
@@ -116,7 +114,6 @@ function App() {
 				<SearchPlace
 					isOpen={open}
 					onClose={handleClose}
-					autocompleteErr={autocompleteErr}
 					handleCityChange={handleCityChange}
 					city={city}
 					autocompleteCities={autocompleteCities}
@@ -133,7 +130,7 @@ function App() {
 				/>
 			</div>
 
-			<Forecast {...forecast} />
+			<Forecast values={forecast.values || []} />
 		</div>
 	)
 }

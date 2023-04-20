@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom'
+import './SearchPlace.css'
 
 const SearchPlace = ({
 	isOpen,
 	onClose,
-	autocompleteErr,
 	handleCityChange,
 	city,
 	autocompleteCities,
@@ -12,15 +12,10 @@ const SearchPlace = ({
 	return ReactDOM.createPortal(
 		isOpen && (
 			<div className='modal-root'>
-				<div className='placesAutocomplete'>
-					<div className='placesAutocomplete__inputWrap'>
-						<label htmlFor='city' className='label'>
-							Your city
-							{autocompleteErr && (
-								<span className='inputError'>{autocompleteErr}</span>
-							)}
-						</label>
+				<div className='form-container'>
+					<div className='form-inputs'>
 						<input
+							className='change-city-input'
 							list='places'
 							type='text'
 							id='city'
@@ -37,6 +32,7 @@ const SearchPlace = ({
 							))}
 						</datalist>
 						<button
+							className='submit-city-btn'
 							onClick={() => {
 								handleOnClick()
 								onClose()
@@ -44,8 +40,9 @@ const SearchPlace = ({
 						>
 							Submit
 						</button>
-						<button onClick={() => onClose()}>close</button>
 					</div>
+
+					<button onClick={() => onClose()}>Close</button>
 				</div>
 			</div>
 		),
