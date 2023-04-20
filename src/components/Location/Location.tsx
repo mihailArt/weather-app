@@ -1,6 +1,7 @@
 import './Location.css'
 
 interface ILocation {
+	handleOpen: any
 	country?: string
 	city: string
 	time: Date
@@ -8,7 +9,14 @@ interface ILocation {
 	long: number
 }
 
-const Location = ({ country, city, time, lat, long }: ILocation) => {
+const Location = ({
+	handleOpen,
+	country,
+	city,
+	time,
+	lat,
+	long,
+}: ILocation) => {
 	return (
 		<div className='location'>
 			Location
@@ -17,6 +25,7 @@ const Location = ({ country, city, time, lat, long }: ILocation) => {
 			<div>Time: {time.toLocaleTimeString()}</div>
 			<div>Latitude: {lat}</div>
 			<div>Longitude: {long}</div>
+			<button onClick={handleOpen}>Change city</button>
 		</div>
 	)
 }

@@ -3,6 +3,7 @@ import './App.css'
 import Location from './components/Location/Location'
 import Weather from './components/Weather/Weather'
 import Forecast from './components/Forecast/Forecast'
+import SearchPlace from './components/SearchPlace/SearchPlace'
 
 const fetchPlace = async (text: any) => {
 	try {
@@ -25,6 +26,10 @@ function App() {
 	const [city, setCity] = useState('')
 	const [autocompleteCities, setAutocompleteCities] = useState<any>([])
 	const [autocompleteErr, setAutocompleteErr] = useState('')
+
+	const [open, setOpen] = useState(false)
+	const handleOpen = () => setOpen(true)
+	const handleClose = () => setOpen(false)
 
 	useEffect(() => {
 		navigator.geolocation.getCurrentPosition(position => {
@@ -60,10 +65,8 @@ function App() {
 	const handleOnClick = async () => {
 		if (city !== '') {
 			const cityData = await fetchPlace(city)
-			console.log(lat + ' ' + long)
 			setLong(cityData.features[0].center[0])
 			setLat(cityData.features[0].center[1])
-			console.log(lat + ' ' + long)
 		}
 	}
 
@@ -90,35 +93,15 @@ function App() {
 					wind={data.wind.deg + ' ' + data.wind.speed}
 				/>
 
-				<div>
-					<div className='placesAutocomplete'>
-						<div className='placesAutocomplete__inputWrap'>
-							<label htmlFor='city' className='label'>
-								Your city
-								{autocompleteErr && (
-									<span className='inputError'>{autocompleteErr}</span>
-								)}
-							</label>
-							<input
-								list='places'
-								type='text'
-								id='city'
-								name='city'
-								onChange={handleCityChange}
-								value={city}
-								required
-								pattern={autocompleteCities.join('|')}
-								autoComplete='off'
-							/>
-							<datalist id='places'>
-								{autocompleteCities.map((city: any, i: any) => (
-									<option key={i}>{city}</option>
-								))}
-							</datalist>
-							<button onClick={handleOnClick}>Submit</button>
-						</div>
-					</div>
-				</div>
+				<SearchPlace
+					isOpen={open}
+					onClose={handleClose}
+					autocompleteErr={autocompleteErr}
+					handleCityChange={handleCityChange}
+					city={city}
+					autocompleteCities={autocompleteCities}
+					handleOnClick={handleOnClick}
+				/>
 
 				<Location
 					country={data.sys.country || null}
@@ -126,6 +109,7 @@ function App() {
 					time={new Date(data.dt * 1000)}
 					lat={lat}
 					long={long}
+					handleOpen={handleOpen}
 				/>
 			</div>
 
