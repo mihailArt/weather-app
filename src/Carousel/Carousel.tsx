@@ -2,7 +2,8 @@ import { useEffect, useState, Children, cloneElement } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import './Carousel.css'
 
-const PAGE_WIDTH = 450
+const PAGE_WIDTH = 225
+const COUNT_OF_PAGES = 5
 
 const Carousel = ({ children }: any) => {
 	const [pages, setPages] = useState([])
@@ -11,17 +12,13 @@ const Carousel = ({ children }: any) => {
 	const handleLeftArrowClick = () => {
 		setOffset(currentOffset => {
 			const newOffset = currentOffset + PAGE_WIDTH
-			console.log(newOffset)
 			return Math.min(newOffset, 0)
 		})
 	}
 	const handleRightArrowClick = () => {
 		setOffset(currentOffset => {
 			const newOffset = currentOffset - PAGE_WIDTH
-
-			const maxOffset = -(PAGE_WIDTH * (pages.length - 1))
-
-			console.log(newOffset, maxOffset)
+			const maxOffset = -(PAGE_WIDTH * (pages.length - 1 - COUNT_OF_PAGES))
 			return Math.max(newOffset, maxOffset)
 		})
 	}

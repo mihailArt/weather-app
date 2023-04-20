@@ -1,14 +1,24 @@
+.forecast {
+	display: flex;
+	justify-content: center;
+}
+
+.forecast-day-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	user-select: none;
+}
+
 .forecast-day {
-	/* border: 1px solid black; */
+	margin: 5px;
+	border: 1px solid black;
 	border-radius: 8px;
-	/* padding: 10px;
-	padding-bottom: 20px; */
+	padding: 10px;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	/* width: 12%; */
-	/* height: 300px; */
 	user-select: none;
 }

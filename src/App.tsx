@@ -63,7 +63,7 @@ function App() {
 				})
 
 			await fetch(
-				`${process.env.REACT_APP_API_URL_FORECAST}/forecast?locations=${lat},${long}&aggregateHours=24&unitGroup=metric&shortColumnNames=false&contentType=json&forecastDays=7&key=${process.env.REACT_APP_API_KEY_FORECAST}`
+				`${process.env.REACT_APP_API_URL_FORECAST}/forecast?locations=${lat},${long}&aggregateHours=24&unitGroup=metric&shortColumnNames=false&contentType=json&forecastDays=16&key=${process.env.REACT_APP_API_KEY_FORECAST}`
 			)
 				.then(res => res.json())
 				.then(result => {
