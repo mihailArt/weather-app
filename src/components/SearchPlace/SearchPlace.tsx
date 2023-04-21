@@ -27,7 +27,7 @@ const SearchPlace = ({
 							autoComplete='off'
 						/>
 						<datalist id='places'>
-							{autocompleteCities.map((city: any, i: any) => (
+							{autocompleteCities.map((city: string, i: number) => (
 								<option key={i}>{city}</option>
 							))}
 						</datalist>
@@ -40,9 +40,10 @@ const SearchPlace = ({
 						>
 							Submit
 						</button>
+						<button className='close-btn' onClick={() => onClose()}>
+							Close
+						</button>
 					</div>
-
-					<button onClick={() => onClose()}>Close</button>
 				</div>
 			</div>
 		),

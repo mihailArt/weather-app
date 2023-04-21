@@ -1,42 +1,19 @@
-import Carousel from '../../Carousel/Carousel'
+import Carousel from '../Carousel/Carousel'
+import getCardinalDirection from '../../helpers/directionHelper'
+import getDate from '../../helpers/dateHelper'
 import './Forecast.css'
-
-const options: Intl.DateTimeFormatOptions = {
-	weekday: 'long',
-	month: 'long',
-	day: 'numeric',
-}
-
-function getCardinalDirection(angle: any) {
-	const directions = [
-		'↑ N',
-		'↗ NE',
-		'→ E',
-		'↘ SE',
-		'↓ S',
-		'↙ SW',
-		'← W',
-		'↖ NW',
-	]
-	return directions[Math.round(angle / 45) % 8]
-}
 
 const Forecast = ({ values }: any) => {
 	return (
 		values.length && (
 			<div className='forecast'>
 				<Carousel>
-					{values.map((day: any, i: any) => {
+					{values.map((day: any, i: number) => {
 						return (
 							<div key={i} className='forecast-day-card'>
 								<div className='forecast-day'>
 									<div className='forecast-day-header'>
-										<div className='forecast-date'>
-											{new Date(day.datetime).toLocaleDateString(
-												'en-us',
-												options
-											)}
-										</div>
+										<div className='forecast-date'>{getDate(day.datetime)}</div>
 										<div className='forecast-description'>{day.conditions}</div>
 									</div>
 									<div className='forecast-temp'>

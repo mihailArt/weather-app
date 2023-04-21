@@ -1,19 +1,13 @@
-import { useEffect } from 'react'
+import getDate from '../../helpers/dateHelper'
 import './Weather.css'
 
 interface IWeather {
-	date: Date
+	date: number
 	description: string
 	temp: number
 	feels_like: number
 	pressure: number
 	wind: string
-}
-
-const options: Intl.DateTimeFormatOptions = {
-	weekday: 'long',
-	month: 'long',
-	day: 'numeric',
 }
 
 const Weather = ({
@@ -28,7 +22,8 @@ const Weather = ({
 		<div className='weather-today'>
 			<div className='weather-today-header'>
 				<div className='weather-date'>
-					{date.toLocaleDateString('en-us', options)}
+					{/* {date.toLocaleDateString('en-us', options)} */}
+					{getDate(date)}
 				</div>
 				<div className='weather-description'>{`${description[0].toUpperCase()}${description.slice(
 					1

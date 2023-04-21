@@ -1,25 +1,12 @@
 import { useEffect, useState } from 'react'
+import getCardinalDirection from './helpers/directionHelper'
 import './App.css'
 import Location from './components/Location/Location'
 import Weather from './components/Weather/Weather'
 import Forecast from './components/Forecast/Forecast'
 import SearchPlace from './components/SearchPlace/SearchPlace'
 
-function getCardinalDirection(angle: any) {
-	const directions = [
-		'↑ N',
-		'↗ NE',
-		'→ E',
-		'↘ SE',
-		'↓ S',
-		'↙ SW',
-		'← W',
-		'↖ NW',
-	]
-	return directions[Math.round(angle / 45) % 8]
-}
-
-const fetchPlace = async (text: any) => {
+const fetchPlace = async (text: string) => {
 	try {
 		const res = await fetch(
 			`${process.env.REACT_APP_API_URL_PLACES}/${text}.json?access_token=${process.env.REACT_APP_API_KEY_PLACES}&cachebuster=1625641871908&autocomplete=true&types=place`
@@ -73,8 +60,6 @@ function App() {
 		if (lat !== 0 || long !== 0) fetchData()
 	}, [lat, long])
 
-	if (!data) return <>"Loading..."</>
-
 	const handleOnClick = async () => {
 		if (city !== '') {
 			const cityData = await fetchPlace(city)
@@ -83,55 +68,65 @@ function App() {
 		}
 	}
 
-	const handleCityChange = async (e: any) => {
+	const handleCityChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		setCity(e.target.value)
 		if (!city) return
 
 		const res = await fetchPlace(city)
 		!autocompleteCities.includes(e.target.value) &&
 			res.features &&
-			setAutocompleteCities(res.features.map((place: any) => place.place_name))
+			setAutocompleteCities(
+				res.features.map((place: { place_name: string }) => place.place_name)
+			)
 	}
 
 	return (
-		<div className='app'>
-			<div className='daily-info'>
-				<Weather
-					date={new Date(data.dt * 1000)}
-					description={data.weather[0].description}
-					temp={data.main.temp}
-					feels_like={data.main.feels_like}
-					pressure={data.main.pressure}
-					wind={
-						'Wind: ' +
-						getCardinalDirection(data.wind.deg) +
-						', ' +
-						Math.round(data.wind.speed) +
-						' m/s'
-					}
-				/>
+		<>
+			{data ? (
+				<div className='app'>
+					<div className='daily-info'>
+						<div className='weather-adopt'>
+							<Weather
+								date={data.dt * 1000}
+								description={data.weather[0].description}
+								temp={data.main.temp}
+								feels_like={data.main.feels_like}
+								pressure={data.main.pressure}
+								wind={
+									'Wind: ' +
+									getCardinalDirection(data.wind.deg) +
+									', ' +
+									Math.round(data.wind.speed) +
+									' m/s'
+								}
+							/>
+						</div>
 
-				<SearchPlace
-					isOpen={open}
-					onClose={handleClose}
-					handleCityChange={handleCityChange}
-					city={city}
-					autocompleteCities={autocompleteCities}
-					handleOnClick={handleOnClick}
-				/>
+						<SearchPlace
+							isOpen={open}
+							onClose={handleClose}
+							handleCityChange={handleCityChange}
+							city={city}
+							autocompleteCities={autocompleteCities}
+							handleOnClick={handleOnClick}
+						/>
 
-				<Location
-					country={data.sys.country || null}
-					city={data.name}
-					time={new Date(data.dt * 1000)}
-					lat={lat}
-					long={long}
-					handleOpen={handleOpen}
-				/>
-			</div>
+						<Location
+							country={data.sys.country || null}
+							city={data.name}
+							time={new Date(data.dt * 1000)}
+							lat={lat}
+							long={long}
+							handleOpen={handleOpen}
+						/>
+					</div>
 
-			<Forecast values={forecast.values || []} />
-		</div>
+					<Forecast values={forecast.values || []} />
+				</div>
+			) : (
+				<>Loading...</>
+			)}
+		</>
 	)
 }
 

@@ -6,18 +6,15 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	padding: 30px;
+	background: url(./assets/background.jpg) no-repeat center center fixed;
+	background-size: cover;
+	height: 100%;
+	overflow: hidden;
 }
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
-}
-
-html {
-	background: url(./assets/background.jpg) no-repeat center center fixed;
-	background-size: cover;
-	height: 100%;
-	overflow: hidden;
 }
 
 .modal-root {
